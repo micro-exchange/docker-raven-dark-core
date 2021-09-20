@@ -41,7 +41,7 @@ RUN apt-get install -y libevent-dev
 RUN apt-get install -y bsdmainutils
 RUN apt-get install -y python3
 
-ENV RAVENDARK_VERSION=0.4.3
+ENV RAVENDARK_VERSION=0.4
 ENV RAVENDARK_PREFIX=/opt/ravendark-${RAVENDARK_VERSION}
 
 RUN git clone https://github.com/raven-dark/raven-dark.git /ravendark-${RAVENDARK_VERSION} \
@@ -101,7 +101,7 @@ RUN  set -ex; \
 RUN useradd -r ravendark
 
 ENV RAVENDARK_DATA=/home/ravendark/.ravendark
-ENV RAVENDARK_VERSION=0.4.3
+ENV RAVENDARK_VERSION=0.4
 ENV RAVENDARK_PREFIX=/opt/ravendark-${RAVENDARK_VERSION}
 ENV PATH=${RAVENDARK_PREFIX}/bin:$PATH
 

@@ -6,7 +6,7 @@ A RavenDark Core docker image.
 
 ## Tags
 
-- `0.4`, `0.4.3`, `latest` ([0.4.3/Dockerfile](https://github.com/micro-exchange/docker-raven-dark-core/blob/master/0.4.3/Dockerfile)) (from master - last commit: [f0b69b](https://github.com/raven-dark/raven-dark/commit/f0b69bc4d6392d36dfe7f1912eb33693c619d58f))
+- `0.4`, `0.4.3`, `latest` ([0.4/Dockerfile](https://github.com/micro-exchange/docker-raven-dark-core/blob/master/0.4/Dockerfile)) (from master - last commit: [f0b69b](https://github.com/raven-dark/raven-dark/commit/f0b69bc4d6392d36dfe7f1912eb33693c619d58f))
 
 **Picking the right tag**
 
