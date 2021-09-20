@@ -110,7 +110,7 @@ COPY docker-entrypoint.sh /entrypoint.sh
 
 VOLUME ["/home/ravendark/.ravendark"]
 
-EXPOSE 8332 8333 18332 18333 18444
+EXPOSE 7207 17207 9051 6666 16666 
 
 ENTRYPOINT ["sh", "/entrypoint.sh"]
 
