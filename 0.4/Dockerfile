@@ -17,7 +17,7 @@ RUN mkdir -p ${BERKELEYDB_PREFIX}
 WORKDIR /${BERKELEYDB_VERSION}/build_unix
 
 RUN ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=${BERKELEYDB_PREFIX}
-RUN make -j4
+RUN make -j`nproc`
 RUN make install
 RUN rm -rf ${BERKELEYDB_PREFIX}/docs
 
@@ -41,18 +41,19 @@ RUN apt-get install -y libevent-dev
 RUN apt-get install -y bsdmainutils
 RUN apt-get install -y python3
 
-ENV RAVENDARK_VERSION=0.4
+ENV RAVENDARK_VERSION=0.4.3
 ENV RAVENDARK_PREFIX=/opt/ravendark-${RAVENDARK_VERSION}
 
 RUN git clone https://github.com/raven-dark/raven-dark.git /ravendark-${RAVENDARK_VERSION} \
     && cd /ravendark-${RAVENDARK_VERSION} \
-    && git checkout f0b69bc4d6392d36dfe7f1912eb33693c619d58f
+    && git checkout ${RAVENDARK_VERSION}
 
 WORKDIR /ravendark-${RAVENDARK_VERSION}
 
-# RUN sed -i '/AC_PREREQ/a\AR_FLAGS=cr' src/univalue/configure.ac
-# RUN sed -i '/AX_PROG_CC_FOR_BUILD/a\AR_FLAGS=cr' src/secp256k1/configure.ac
-# RUN sed -i s:sys/fcntl.h:fcntl.h: src/compat.h
+RUN sed -i '/AC_PREREQ/a\AR_FLAGS=cr' src/univalue/configure.ac
+RUN sed -i '/AX_PROG_CC_FOR_BUILD/a\AR_FLAGS=cr' src/secp256k1/configure.ac
+RUN sed -i s:sys/fcntl.h:fcntl.h: src/compat.h
+
 RUN ./autogen.sh
 RUN ./configure LDFLAGS=-L`ls -d /opt/db*`/lib/ CPPFLAGS=-I`ls -d /opt/db*`/include/ \
     --prefix=${RAVENDARK_PREFIX} \
@@ -64,13 +65,13 @@ RUN ./configure LDFLAGS=-L`ls -d /opt/db*`/lib/ CPPFLAGS=-I`ls -d /opt/db*`/incl
     --with-utils \
     --with-libs \
     --with-daemon
-RUN make -j4
+RUN make -j`nproc`
 RUN make install
 RUN strip ${RAVENDARK_PREFIX}/bin/ravendark-cli
 # RUN strip ${RAVENDARK_PREFIX}/bin/ravendark-tx
 RUN strip ${RAVENDARK_PREFIX}/bin/ravendarkd
-# RUN strip ${RAVENDARK_PREFIX}/lib/libravendarkconsensus.a
-# RUN strip ${RAVENDARK_PREFIX}/lib/libravendarkconsensus.so.0.0.0
+RUN strip ${RAVENDARK_PREFIX}/lib/libravendarkconsensus.a
+RUN strip ${RAVENDARK_PREFIX}/lib/libravendarkconsensus.so.0.0.0
 
 # Build stage for compiled artifacts
 FROM ubuntu
@@ -101,7 +102,7 @@ RUN  set -ex; \
 RUN useradd -r ravendark
 
 ENV RAVENDARK_DATA=/home/ravendark/.ravendark
-ENV RAVENDARK_VERSION=0.4
+ENV RAVENDARK_VERSION=0.4.3
 ENV RAVENDARK_PREFIX=/opt/ravendark-${RAVENDARK_VERSION}
 ENV PATH=${RAVENDARK_PREFIX}/bin:$PATH
 

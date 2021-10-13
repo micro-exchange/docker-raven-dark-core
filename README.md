@@ -7,12 +7,15 @@ A RavenDark Core docker image.
 ## Tags
 
 - `0.4`, `0.4.3`, `latest` ([0.4/Dockerfile](https://github.com/micro-exchange/docker-raven-dark-core/blob/master/0.4/Dockerfile)) (from master - last commit: [f0b69b](https://github.com/raven-dark/raven-dark/commit/f0b69bc4d6392d36dfe7f1912eb33693c619d58f))
+- `0.4-alpine`, `0.4.3-alpine` ([0.4/alpine/Dockerfile](https://github.com/micro-exchange/docker-ravencoin-core/blob/master/0.4/alpine/Dockerfile))
 
 **Picking the right tag**
 
 - `microexchange/raven-dark-core:latest`: points to the latest stable release available of RavenDark Core. Use this only if you know what you're doing as upgrading RavenDark Core blindly is a risky procedure.
+- `microexchange/raven-dark-core:alpine`: same as above but using the Alpine Linux distribution (a resource efficient Linux distribution with security in mind, but not officially supported by the RavenDark Core team — use at your own risk).
 - `microexchange/raven-dark-core:<version>`: based on a Ubuntu image, points to a specific version branch or release of RavenDark Core. Uses the pre-compiled binaries which are fully tested by the RavenDark Core team.
-
+- `microexchange/raven-dark-core:<version>-alpine`: same as above but using the Alpine Linux distribution.
+  
 ## What is RavenDark Core?
 
 Learn more about [RavenDark Core](https://github.com/raven-dark/raven-dark).

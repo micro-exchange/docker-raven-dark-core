@@ -9,6 +9,7 @@ jobs:
       matrix:
         version:
           - '0.4'
+          - '0.4/apline'
       fail-fast: false
     steps:
       - name: Set up Docker Buildx
